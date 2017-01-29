@@ -54,9 +54,7 @@ public class Main {
                 int keyTogameboard = findKeybyGameboardContent(gameboardChosenByAI, gameboardChosenByUser);
                 System.out.println("id of new Gameboard is" + keyTogameboard);
                g = gameboardChosenByAI.getValueByID(keyTogameboard);
-               System.out.println(g.toString());
-                
-               endOfGameCheck(g);
+                endOfGameCheck(g);
             }catch (EndOfGameException eog){
                 System.out.println("End of game: "+ eog.getMessage()); 
                 end = true;
