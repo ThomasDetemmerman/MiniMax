@@ -7,7 +7,7 @@ This game is only created to try out the MiniMax algorithm. Basic functionalitie
 Class MiniMax contains the boolean value showBuildTree. Once toggled to true, it will show the entire build tree while the program is calculating all possibilities. It looks cool but not pracitcal since this will take forever to build the tree. 
 
 ### Utility
-The points that MiniMax recieves whith the current gameboard that is displayed. During the game this is obviously zero. Only at the end of the game the value changes. <br>
+The points that MiniMax recieves with the current gameboard that is displayed. During the game this is obviously zero. Only at the end of the game the value changes. <br>
 0 = draw<br>
 1 = MiniMax won<br>
 -1 = MiniMax lost *(not possible if well-implemented)*<br>
