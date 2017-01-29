@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 final class Gameboard {
 
     private char[][] content;
-    private HashMap <Integer, Gameboard> successors = new HashMap <Integer, Gameboard>();
+    private HashMap<Integer, Gameboard> successors = new HashMap<Integer, Gameboard>();
     private final int ID;
     private final int parentID;
     private GlobalMaxID globalmaxid;
@@ -32,16 +32,14 @@ final class Gameboard {
         this.parentID = parentID;
         setContent(content);
     }
-    
-    public Gameboard getValueByID(int ID){
+
+    public Gameboard getValueByID(int ID) {
         return successors.get(ID);
     }
 
     public GlobalMaxID getGlobalmaxidObject() {
         return globalmaxid;
     }
-    
-  
 
     public int getParentID() {
         return ID;
@@ -59,12 +57,11 @@ final class Gameboard {
         return content;
     }
 
-    public HashMap <Integer, Gameboard> getSuccessors() {
+    public HashMap<Integer, Gameboard> getSuccessors() {
         return successors;
     }
-    
-    public void setSuccessors(char player) {
 
+    public void setSuccessors(char player) {
 
         for (int i = 0; i < getContent().length; i++) {
             for (int j = 0; j < getContent()[i].length; j++) {
@@ -72,75 +69,82 @@ final class Gameboard {
                 if (current == '.') {
 
                     char[][] childContent = duplicateGameboard(content);
-                   // printContent(childContent);
                     childContent[i][j] = player;
-                    successors.put(globalmaxid.getCurrentGlobalMaxID()+1,  new Gameboard(childContent, this.ID, globalmaxid));
-                    
-                    //System.out.println(successors.size());
+                    successors.put(globalmaxid.getCurrentGlobalMaxID() + 1, new Gameboard(childContent, this.ID, globalmaxid));
+
                 }
-                
+
             }
-        }//successors.keySet().forEach(key -> System.out.println(key + "->" + successors.get(key)));
+        }
         
+    }
+
+   
+    public boolean terminaltest() {
+        /* check gameboard full*/
+        if(gameboardFull()){
+            return true;
+        }
+        /* checking diagonalen*/
+        String dia1 = "";
+        String dia2 = "";
+
+        for (int i = 0; i < content.length; i++) {
+            dia1 += content[i][i];
+            dia2 += content[i][content.length - 1 - i];
+
+        }
+        if ("ooo".equals(dia1) || "ooo".equals(dia2) || "xxx".equals(dia1) || "xxx".equals(dia2)) {
+
+            return true;
+        }
+        /* checking colom and row */
+        String colom = "";
+        String row = "";
+
+        for (int i = 0; i < content.length; i++) {
+            for (int j = 0; j < content[i].length; j++) {
+                colom += content[i][j];
+                row += content[j][i];
+            }
+
+            if ("ooo".equals(colom) || "ooo".equals(row) || "xxx".equals(colom) || "xxx".equals(row)) {
+
+                return true;
+            }
+            row = "";
+            colom = "";
+        }
+        return false;
+    }
+
+    private char[][] duplicateGameboard(char[][] g) {
+        char[][] c = new char[g.length][g[0].length];
+
+        for (int i = 0; i < g.length; i++) {
+            System.arraycopy(g[i], 0, c[i], 0, g[i].length);
+        }
+        return c;
     }
 
     
 
-    public boolean terminaltest() {
-        try {
-            whoWins();
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
-    public int utility() throws Exception {
-            if (whoWins() == 'x') {
-                return 1;
-            }
-            if (whoWins() == 'o') {
-                return 0;
-
-            }
-        throw new Exception("invalid user or invalid call of utility funciton");
-    }
-
-    @Override
-    public String toString() {
-            String output = String.format("Gameboard ID %d%nParent ID %d", this.getCurrentID(), this.getParentID());
-            output += "\n";
-            output += "   0  1  2\n";
-            int i = 0;
-            for (char[] rij : getContent()) {
-                output += i + " ";
-                i++;
-                for (char vakje : rij) {
-                    output += String.format(" %s ", vakje);
-                }
-                output += "\n";
-            }
-            
-            return output;
-       
-    }
-
-    public char whoWins() throws Exception {
-        /* checking diagonalen*/
+    public int utility() {
+        int points = 0;
         String dia1 = "";
         String dia2 = "";
         for (int i = 0; i < content.length; i++) {
             dia1 += content[i][i];
-            dia2 += content[i][content.length - 1];
+            dia2 += content[i][content.length - 1 - i];
 
         }
         if ("ooo".equals(dia1) || "ooo".equals(dia2)) {
 
-            return 'o';
+            points -= 1;
         }
         if ("xxx".equals(dia1) || "xxx".equals(dia2)) {
 
-            return 'x';
+            points += 1;
         }
         /* checking colom and row */
         String colom = "";
@@ -148,41 +152,53 @@ final class Gameboard {
         for (int i = 0; i < content.length; i++) {
             for (int j = 0; j < content[i].length; j++) {
                 colom += content[i][j];
+
                 row += content[j][i];
+
             }
-            row = "";
-            colom = "";
+
             if ("ooo".equals(colom) || "ooo".equals(row)) {
 
-                return 'o';
+                points -= 1;
             }
             if ("xxx".equals(colom) || "xxx".equals(row)) {
 
-                return 'x';
+                points += 1;
+            }
+            row = "";
+            colom = "";
+        }
+        return points;
+    }
+
+    private boolean gameboardFull() {
+        for (char[] row : content) {
+            for (char vak : row) {
+                if (vak == '.') {
+                    return false;
+                }
+
             }
         }
-        throw new Exception("Nobody Wins");
+        return true;
     }
     
-    private char[][] duplicateGameboard(char[][] g){
-        char[][] c = new char[g.length][g[0].length];
-        
-        for (int i = 0; i < g.length; i++) {
-            System.arraycopy(g[i], 0, c[i], 0, g[i].length);
-        }
-        return c;
-    }
-    
-    private static void printContent(char[][] c) {
-        String output = "";
-        for (char[] rij : c) {
+     @Override
+    public String toString() {
+        String output = String.format("Gameboard ID: %d%nterminaltest: %s%nutility: %d", this.getCurrentID(), this.terminaltest(), utility());
+        output += "\n";
+        output += "   0  1  2\n";
+        int i = 0;
+        for (char[] rij : getContent()) {
+            output += i + " ";
+            i++;
             for (char vakje : rij) {
                 output += String.format(" %s ", vakje);
             }
             output += "\n";
         }
-        System.out.println(output);
+
+        return output;
+
     }
-
-
 }
