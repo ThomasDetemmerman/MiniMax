@@ -31,7 +31,7 @@ public class Main {
                 + "Kind regards, Thomas Detemmerman");
         System.out.println("");
         System.out.println("Rules:");
-        System.out.println("The computer exepects coorindates from the grid. First rownumber, then colomnumber. Both values sepratated with a character in between. This can be any character. For example: 0.1");
+        System.out.println("The computer exepects coorindates from the grid. First rownumber, then colomnumber. Both values must be sepratated with a character in between. This can be any character. For example: 0.1");
         GlobalMaxID gmid = new GlobalMaxID();
         Gameboard g = new Gameboard(createDefaultContent(), 0, gmid);
         MiniMax miniMax = new MiniMax();
