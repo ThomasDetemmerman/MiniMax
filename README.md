@@ -11,7 +11,7 @@ This game is only created to try out the MiniMax algorithm. Basic functionalitie
   - 2.2
 
 ## open issues
-- The algorithm doesn't take advantage of the symmetry characteristics of the gameboard which causes an overload of computed combinations. Currently, 549946 combinations are calculated.
+- The algorithm doesn't take advantage of the symmetry characteristics of the gameboard which causes an overload of computed combinations. Currently, 549946 combinations are calculated. This is not really an issue on a 3x3 grid but can cause some performance problems on larger grids.
 
 ## Some variables clarified
 ### showBuildTree
