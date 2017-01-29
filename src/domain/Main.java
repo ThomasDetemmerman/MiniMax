@@ -28,8 +28,7 @@ public class Main {
         System.out.println("***********");
         System.out.printf("This game is only created to try out the MiniMax algorithm. Basic functionalities like input verification are not suported. %n"
                 + "Class MiniMax contains the boolean value showBuildTree. Once toggled to true, it will show the entire build tree while the program is calculating all possibilities. It looks cool but not pracitcal since this will take forever to build the tree. %n"
-                + "Kind regards, Thomas Detemmerman");
-        System.out.println("");
+                + "Kind regards, Thomas Detemmerman%n");
         System.out.println("Rules:");
         System.out.println("The computer exepects coorindates from the grid. First rownumber, then colomnumber. Both values must be sepratated with a character in between. This can be any character. For example: 0.1");
         GlobalMaxID gmid = new GlobalMaxID();
