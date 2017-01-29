@@ -19,7 +19,7 @@ True when the game ends. This is when someone has a 3-in-a-row or the gameboard 
 - Minimax is the cross and you are the circle
 - Minimax always starts
 - first person with 3 in a row wins
-- The computer exepects coorindates from the grid. First rownumber, then colomnumber. Both values sepratated with a character in between. This can be any character. For example:
+- The computer exepects coorindates from the grid. First rownumber, then colomnumber. Both values are sepratated with a character in between. This can be any character. For example:
   - 1,1
   - 2.2
   
