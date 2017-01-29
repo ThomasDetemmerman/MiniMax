@@ -13,6 +13,8 @@ This game is only created to try out the MiniMax algorithm. Basic functionalitie
 ## open issues
 - The algorithm doesn't take advantage of the symmetry characteristics of the gameboard which causes an overload of computed combinations. Currently, 549946 combinations are calculated. This is not really an issue on a 3x3 grid but can cause some performance problems on larger grids.
 
+- MiniMax does not always immediately take the 'winning step'. For example 'x . x'. It is possible MiniMax does not finnish the game by placing an x in the middle (but put it somewere else). I assume it has someting to do with `utility()`. But don't worry, MiniMax will win eventually ;).
+
 ## Some variables clarified
 ### showBuildTree
 Class MiniMax contains the boolean value showBuildTree. Once toggled to true, it will show the entire build tree while the program is calculating all possibilities. It looks cool but not pracitcal since this will take forever to build the tree. 
