@@ -25,4 +25,4 @@ True when the game ends. This is when someone has a 3-in-a-row or the gameboard 
   
 
 <br><br>
-Please note, I'm a sysadmin and it has been a while since lost time I programmed. I probably made some concept-mistakes. But hey, it worked ¯\_(ツ)_/¯
+Please note, I'm a sysadmin and it has been a while since last time I programmed. I probably made some concept-mistakes. But hey, it works ¯\_(ツ)_/¯
